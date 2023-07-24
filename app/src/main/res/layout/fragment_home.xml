@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragment.HomeFragment">
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:fontFamily="@font/black"
+        android:gravity="center"
+        android:text="Find Products" />
+
+    <SearchView
+        android:id="@+id/searchProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search here"
+        android:iconifiedByDefault="true"
+        android:background="@drawable/bgone"
+        android:layout_margin="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcProduct"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/card_view_design"/>
+
+</LinearLayout>
