@@ -13,6 +13,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 class ActivityData : AppCompatActivity() {
+    //hello
     private var score=0
     private lateinit var binding:ActivityDataBinding
     private var storage: FirebaseStorage?=null
