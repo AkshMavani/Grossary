@@ -84,7 +84,7 @@
             </com.hbb20.CountryCodePicker>
 
             <EditText
-                android:id="@+id/editTextText3"
+                android:id="@+id/idEdtPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

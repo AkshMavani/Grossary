@@ -13,7 +13,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 class ActivityData : AppCompatActivity() {
-    var score=0
+    private var score=0
     private lateinit var binding:ActivityDataBinding
     private var storage: FirebaseStorage?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +60,7 @@ class ActivityData : AppCompatActivity() {
             }
         }
          binding.btnAddBasket.setOnClickListener {
+             Log.e("TAG", "Pricedata:$pricedata " )
              val storageRef = storage!!.reference
              val mountainsRef = storageRef.child(dt.toString())
              binding.imageView5.isDrawingCacheEnabled = true
@@ -71,10 +72,10 @@ class ActivityData : AppCompatActivity() {
 
              var uploadTask = mountainsRef.putBytes(data)
              uploadTask.addOnFailureListener {
-                 Log.e("TAG", "onCreate:fail ", )
+                 Log.e("TAG", "onCreate:fail ")
                  // Handle unsuccessful uploads
              }.addOnCompleteListener { taskSnapshot ->
-                 Log.e("TAG", "onCreate:success ", )
+                 Log.e("TAG", "onCreate:success " )
                     if (taskSnapshot.isSuccessful){
                     mountainsRef.downloadUrl.addOnSuccessListener { task->
                         Log.e("TAG", "onCreate:$task " )
@@ -106,10 +107,10 @@ class ActivityData : AppCompatActivity() {
 
             var uploadTask = mountainsRef.putBytes(data)
             uploadTask.addOnFailureListener {
-                Log.e("TAG", "onCreate:fail ", )
+                Log.e("TAG", "onCreate:fail " )
                 // Handle unsuccessful uploads
             }.addOnCompleteListener { taskSnapshot ->
-                Log.e("TAG", "onCreate:success ", )
+                Log.e("TAG", "onCreate:success " )
                 if (taskSnapshot.isSuccessful){
                     mountainsRef.downloadUrl.addOnSuccessListener { task->
                         Log.e("TAG", "onCreate:$task " )

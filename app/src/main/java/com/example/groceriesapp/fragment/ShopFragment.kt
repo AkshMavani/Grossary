@@ -11,8 +11,11 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.groceriesapp.ParantAdapter
 import com.example.groceriesapp.R
 import com.example.groceriesapp.databinding.FragmentShopBinding
+import com.example.groceriesapp.utils.SliderAdapter
+import com.example.groceriesapp.utils.SliderData
 import com.example.multityperecycleview.ChildModelClass
 import com.example.multityperecycleview.ParentModelClass
+import com.smarteist.autoimageslider.SliderView
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +27,10 @@ private const val ARG_PARAM2 = "param2"
 class ShopFragment : Fragment() {
     private lateinit var _binding: FragmentShopBinding
     private val binding get() = _binding
+    var url1 = "https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png"
+    var url2 = "https://www.tutorialspoint.com/images/logo.png"
+    var url3 =
+        "https://bizzbucket.co/wp-content/uploads/2020/08/Life-in-The-Metro-Blog-Title-22.png"
     val parentModelClass:ArrayList<ParentModelClass> = ArrayList()
     val childModelClass:ArrayList<ChildModelClass> = ArrayList()
 
@@ -55,12 +62,23 @@ class ShopFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding= FragmentShopBinding.inflate(inflater,container,false)
-        val slidermodel = ArrayList<SlideModel>()
-        slidermodel.add(SlideModel(R.drawable.discount,ScaleTypes.FIT))
-        slidermodel.add(SlideModel(R.drawable.dis1,ScaleTypes.FIT))
-        slidermodel.add(SlideModel(R.drawable.dis3,ScaleTypes.FIT))
 
-        binding.imageslider.setImageList(slidermodel)
+        val sliderDataArrayList = ArrayList<SliderData>()
+        sliderDataArrayList.add(SliderData(url1))
+        sliderDataArrayList.add(SliderData(url2))
+        sliderDataArrayList.add(SliderData(url3))
+
+        // passing this array list inside our adapter class.
+
+        // passing this array list inside our adapter class.
+        val adapter = SliderAdapter(context, sliderDataArrayList)
+
+       binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+        binding.slider.setSliderAdapter(adapter)
+
+        binding.slider.scrollTimeInSec = 3
+        binding.slider.isAutoCycle = true
+        binding.slider.startAutoCycle()
         val layoutManager = LinearLayoutManager(context)
         binding.rc.layoutManager = layoutManager
         latestlist.add(ChildModelClass(R.drawable.banana,"100","Apple","1kg","Natural Red Apple","An apple is a round fruit with red or green skin and a whitish inside. One variety of apple might be sweet, another sour. The apple isn't just a fruit.","100gr","5"))

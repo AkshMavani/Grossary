@@ -1,5 +1,6 @@
 package com.example.groceriesapp.utils
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,32 +9,53 @@ import com.bumptech.glide.Glide
 import com.example.groceriesapp.R
 import com.smarteist.autoimageslider.SliderViewAdapter
 
-class SliderAdapter(private val sliderList: List<dt>) :
-    SliderViewAdapter<SliderAdapter.SliderViewHolder>() {
+class SliderAdapter(context: Context?, sliderDataArrayList: ArrayList<SliderData>) :
+    SliderViewAdapter<SliderAdapter.SliderAdapterViewHolder>() {
+    // list for storing urls of images.
+    private val mSliderItems: List<SliderData>
 
-    // creating  a class for slider view holder
-    class SliderViewHolder(ItemView: View) : SliderViewAdapter.ViewHolder(ItemView) {
-        val sliderIV: ImageView = itemView.findViewById(R.id.idIVSliderItem)
+    // Constructor
+    init {
+        mSliderItems = sliderDataArrayList
     }
 
+    // We are inflating the slider_layout
+    // inside on Create View Holder method.
+    override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterViewHolder {
+        val inflate: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.slider_layout, null)
+        return SliderAdapterViewHolder(inflate)
+    }
 
-    // below method is use to return the count for the size of slider list
+    // Inside on bind view holder we will
+    // set data to item of Slider View.
+    override fun onBindViewHolder(viewHolder: SliderAdapterViewHolder, position: Int) {
+        val (imgUrl) = mSliderItems[position]
+
+        // Glide is use to load image
+        // from url in your imageview.
+        Glide.with(viewHolder.itemView)
+            .load(imgUrl)
+            .fitCenter()
+            .into(viewHolder.imageViewBackground)
+    }
+
+    // this method will return
+    // the count of our list.
     override fun getCount(): Int {
-        return sliderList.size
+        return mSliderItems.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?): SliderAdapter.SliderViewHolder {
-        // on below line we are creating a variable to inflate the layout file which we have created.
-        val itemView: View =
-            LayoutInflater.from(parent!!.context).inflate(R.layout.slider_item, null)
-        // on below line we are passing that view to view holder class.
-        return SliderViewHolder(itemView)
-    }
+    class SliderAdapterViewHolder(itemView: View) :
+        ViewHolder(itemView) {
+        // Adapter class for initializing
+        // the views of our slider view.
+        lateinit var ItemView: View
+        var imageViewBackground: ImageView
 
-    override fun onBindViewHolder(viewHolder: SliderAdapter.SliderViewHolder?, position: Int) {
-        // on below line we are loading an image from image url using Glide library and displaying that image in
-        // our slider image view
-        Glide.with(viewHolder!!.itemView).load(sliderList.get(position)).fitCenter()
-            .into(viewHolder.sliderIV)
+        init {
+            imageViewBackground = itemView.findViewById<ImageView>(R.id.myimage)
+            ItemView = itemView
+        }
     }
 }

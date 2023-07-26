@@ -77,12 +77,13 @@
                 android:fontFamily="@font/black"
                 android:text="code"
                 android:textColor="#7C7C7C" />
+
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/etOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#0000"
-                android:hint="- - - -"
+                android:hint="- - - - - -"
                 android:inputType="number"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +137,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnNext1">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvResend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
