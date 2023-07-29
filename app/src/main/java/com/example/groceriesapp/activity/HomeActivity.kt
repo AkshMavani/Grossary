@@ -32,6 +32,18 @@ class HomeActivity : AppCompatActivity() {
         binding= ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        val icl=findViewById<View>(R.id.include)
+        val networkConnection=Network(applicationContext)
+       networkConnection.observe(this, Observer {
+                isconnected->
+            if (isconnected){
+                icl.visibility= View.GONE
+            }else{
+                icl.visibility= View.VISIBLE
+
+            }
+        })
+
      //   val imageslider=findViewById<ImageSlider>(R.id.imageslider)
 
     }

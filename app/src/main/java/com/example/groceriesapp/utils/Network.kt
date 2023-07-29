@@ -12,6 +12,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.NetworkRequest
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.LiveData
 
 class Network(private val context: Context): LiveData<Boolean>() {
@@ -35,11 +36,15 @@ class Network(private val context: Context): LiveData<Boolean>() {
         }
     }
 
-    @SuppressLint("ObsoleteSdkInt")
+
     override fun onInactive() {
         super.onInactive()
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
-            connectivityManager.unregisterNetworkCallback(connextionmanagercallback())
+            try {
+                connectivityManager.unregisterNetworkCallback(connextionmanagercallback())
+            }catch (e:Exception){
+                Log.e("TAG", "onInactive: $e" )
+            }
         }else{
             context.unregisterReceiver(networkReciver)
         }

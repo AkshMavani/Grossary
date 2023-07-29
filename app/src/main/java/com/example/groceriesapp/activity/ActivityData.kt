@@ -4,8 +4,11 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.Preference
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
+import com.example.groceriesapp.R
 import com.example.groceriesapp.databinding.ActivityDataBinding
 import com.example.groceriesapp.utils.DataModelClass
 import com.google.firebase.database.FirebaseDatabase
@@ -13,7 +16,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 class ActivityData : AppCompatActivity() {
-
+    var fill=false
     private var score=0
     private lateinit var binding:ActivityDataBinding
     private var storage: FirebaseStorage?=null
@@ -96,7 +99,21 @@ class ActivityData : AppCompatActivity() {
              }
 
              }
+        val pref=PreferenceManager.getDefaultSharedPreferences(this)
         binding.imgHeart.setOnClickListener {
+            if (!fill){
+                fill=true
+                val editor = pref.edit()
+                editor.putBoolean("fill", fill)
+                editor.apply()
+               binding.imgHeart.setImageDrawable(resources.getDrawable(R.drawable.baseline_favorite_24))
+            }else{
+                fill=false
+                val editor = pref.edit()
+                editor.putBoolean("fill", fill)
+                editor.apply()
+               binding.imgHeart.setImageDrawable(resources.getDrawable(R.drawable.baseline_favorite_border_24))
+            }
             val storageRef = storage!!.reference
             val mountainsRef = storageRef.child(dt.toString())
             binding.imageView5.isDrawingCacheEnabled = true
@@ -131,5 +148,18 @@ class ActivityData : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val scoreData = sharedPreferences.getBoolean("fill",false)
+        Log.e("TAG", "onResume:$scoreData " )
+        if (scoreData==true){
+           binding.imgHeart.setImageDrawable(resources.getDrawable(R.drawable.baseline_favorite_24))
+        }else{
+           binding.imgHeart.setImageDrawable(resources.getDrawable(R.drawable.baseline_favorite_border_24))
+        }
+        super.onResume()
+    }
+
 
 }
