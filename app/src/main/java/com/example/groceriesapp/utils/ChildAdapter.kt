@@ -89,7 +89,7 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
         holder.btn.setOnClickListener {
             val storageRef = storage!!.reference
             val mountainsRef = storageRef.child(ItemsViewModel.images.toString())
-          holder.imageView.isDrawingCacheEnabled = true
+            holder.imageView.isDrawingCacheEnabled = true
             holder.imageView.buildDrawingCache()
             val bitmap = ( holder.imageView.drawable as BitmapDrawable).bitmap
             val baos = ByteArrayOutputStream()
@@ -98,10 +98,10 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
 
             var uploadTask = mountainsRef.putBytes(data)
             uploadTask.addOnFailureListener {
-                Log.e("TAG", "onCreate:fail ", )
+                Log.e("TAG", "onCreate:fail " )
                 // Handle unsuccessful uploads
             }.addOnCompleteListener { taskSnapshot ->
-                Log.e("TAG", "onCreate:success ", )
+                Log.e("TAG", "onCreate:success")
                 if (taskSnapshot.isSuccessful){
                     mountainsRef.downloadUrl.addOnSuccessListener { task->
                         Log.e("TAG", "onCreate:$task " )
@@ -114,7 +114,6 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
                         }.addOnFailureListener {e->
                             Log.e("TAG", "onCreate:$e " )
                         }
-
                     }
                 }
             }
@@ -123,13 +122,11 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
 
     }
 
-    // return the number of the items in the list
+
     override fun getItemCount(): Int {
         return mList.size
     }
 
-
-    // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.ig)
         val tv:TextView=itemView.findViewById(R.id.tvPrice)

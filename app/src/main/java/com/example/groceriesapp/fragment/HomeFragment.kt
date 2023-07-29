@@ -46,20 +46,20 @@ class HomeFragment : Fragment() {
        binding.rcProduct.layoutManager = LinearLayoutManager(context)
 
         // ArrayList of class ItemsViewModel
-       product.add(ProductModelClass(R.drawable.fruits,"Fruits"))
-       product.add(ProductModelClass(R.drawable.backery,"Backery"))
-       product.add(ProductModelClass(R.drawable.apple,"Vegetable"))
-       product.add(ProductModelClass(R.drawable.apple,"Beverages"))
-       product.add(ProductModelClass(R.drawable.banana,"Backery"))
-       product.add(ProductModelClass(R.drawable.stawbary,"Dry Fruits & Nuts"))
-       product.add(ProductModelClass(R.drawable.stawbary,"snacks"))
+       product.add(ProductModelClass(R.drawable.allfruitss,"Fruits"))
+       product.add(ProductModelClass(R.drawable.backery1,"Backery"))
+       product.add(ProductModelClass(R.drawable.vegetables,"Vegetable"))
+       product.add(ProductModelClass(R.drawable.bevagerss,"Beverages"))
+       product.add(ProductModelClass(R.drawable.grossary,"Grossarys"))
+       product.add(ProductModelClass(R.drawable.df,"Dry Fruits & Nuts"))
+       product.add(ProductModelClass(R.drawable.snacks,"snacks"))
 
 
 
 
         // This will pass the ArrayList to our Adapter
         val adapter = ProductAdapter(product)
-        binding.rcProduct.layoutManager = GridLayoutManager(context,2,LinearLayoutManager.VERTICAL,false)
+        binding.rcProduct.layoutManager = GridLayoutManager(context,3,LinearLayoutManager.VERTICAL,false)
         binding.rcProduct.adapter = adapter
         return binding.root
     }

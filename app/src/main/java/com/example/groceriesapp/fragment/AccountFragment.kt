@@ -1,19 +1,23 @@
 package com.example.groceriesapp.fragment
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.groceriesapp.R
+import androidx.fragment.app.Fragment
 import com.example.groceriesapp.activity.LoginActivity
 import com.example.groceriesapp.databinding.FragmentAccountBinding
-import com.example.groceriesapp.databinding.FragmentCartBinding
+import com.example.multityperecycleview.ChildModelClass
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,10 +51,13 @@ class AccountFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding= FragmentAccountBinding.inflate(inflater,container,false)
         binding.tvLogout.setOnClickListener {
+            var courseModalArrayList: ArrayList<ChildModelClass?>
             val sp = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = sp.edit()
             editor.putBoolean("data", false)
             editor.apply()
+
+
             FirebaseAuth.getInstance().signOut()
             val intent= Intent(context, LoginActivity::class.java)
             startActivity(intent)

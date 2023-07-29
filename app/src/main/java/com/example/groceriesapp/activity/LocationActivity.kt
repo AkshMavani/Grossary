@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.example.groceriesapp.R
 import com.example.groceriesapp.databinding.ActivityLocationBinding
 
 class LocationActivity : AppCompatActivity() {

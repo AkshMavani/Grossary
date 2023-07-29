@@ -28,5 +28,16 @@
         app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
         app:menu="@menu/bottom_nav_menu" />
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_nonetwork"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></include>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

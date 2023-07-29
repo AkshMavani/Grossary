@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/disconnected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageView00"
+            android:layout_width="match_parent"
+            android:layout_height="418dp"
+            android:src="@drawable/baseline_signal_wifi_off_24"/>
+
+        <TextView
+            android:id="@+id/textView00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="disconnected"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</FrameLayout>

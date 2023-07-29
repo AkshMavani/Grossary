@@ -1,6 +1,7 @@
 package com.example.groceriesapp.fragment
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -41,6 +43,7 @@ class CartFragment : Fragment(){
         savedInstanceState: Bundle?,
     ): View? {
         _binding= FragmentCartBinding.inflate(inflater,container,false)
+
         binding.rcCart.layoutManager=LinearLayoutManager(context)
         FirebaseDatabase.getInstance().reference.child("data").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">GroceriesApp</string>
+    <string name="title_onboarding_1">Shop Groceries without stress</string>
+    <string name="description_onboarding_1">Quickly search and add healthy food to your cart</string>
+
+    <string name="title_onboarding_2">Express Delivery within  24 hours</string>
+    <string name="description_onboarding_2">super fast delivery for your valuable groceries </string>
+
+    <string name="title_onboarding_3">Amazing Discount and offers</string>
+    <string name="description_onboarding_3">Cheaper prices then local supermarket great discounts and cash back</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

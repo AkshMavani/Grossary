@@ -36,7 +36,7 @@ class CartAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerView.A
         Picasso.get().load(mList[position].img).placeholder(R.mipmap.ic_launcher).fit().into(holder.imageView)
         holder.tvName.text = ItemsViewModel.ftitle
         holder.tvKg.text = ItemsViewModel.kg
-        holder.tvTotalPrice.text=ItemsViewModel.price+"$"
+        holder.tvTotalPrice.text=ItemsViewModel.price
 
         holder.close.setOnClickListener {
             mList.removeAt(position)
@@ -54,14 +54,14 @@ class CartAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerView.A
                 total--
                 holder.txtNum.text = total.toString()
                 totalprice= ItemsViewModel.price!!.toInt() * total
-                holder.tvTotalPrice.text=totalprice.toString()+"$"
+                holder.tvTotalPrice.text=totalprice.toString()
             }
         }
         holder.imgPlus.setOnClickListener {
             total++
             holder.txtNum.text = total.toString()
             totalprice= ItemsViewModel.price!!.toInt() * total
-            holder.tvTotalPrice.text=totalprice.toString()+"$"
+            holder.tvTotalPrice.text=totalprice.toString()
         }
 
     }
