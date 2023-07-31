@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groceriesapp.R
 import com.example.groceriesapp.databinding.FragmentCartBinding
@@ -33,6 +34,7 @@ class FavouriteFragment : Fragment() {
     private val binding get() = _binding
     val arr:ArrayList<DataModelClass> = ArrayList()
     val arrKey:ArrayList<String> = ArrayList()
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -60,8 +62,17 @@ class FavouriteFragment : Fragment() {
                     arr.add(message!!)
                 }
                 Log.e("TAG", "arr: $arr")
-                val adapter = FavouriteAdapter(arr)
-                binding.rcFavourite.adapter=adapter
+                if (arr.isEmpty()){
+                    binding.animationFavourite.visibility=View.VISIBLE
+                    binding.btnFav.visibility=View.GONE
+                    binding.TvFav.visibility=View.GONE
+                    binding.txtFav.visibility=View.GONE
+                    binding.rcFavourite.visibility
+                }else{
+
+                    val adapter = FavouriteAdapter(arr)
+                    binding.rcFavourite.adapter=adapter
+                }
             }
 
 
@@ -69,19 +80,36 @@ class FavouriteFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+        binding.btnFav.setOnClickListener {
+         FirebaseDatabase.getInstance().reference.child("FavouriteData").addValueEventListener(object : ValueEventListener {
+             override fun onDataChange(snapshot: DataSnapshot) {
+                 for (i in snapshot.children){
+                     val name=i.child("ftitle").value
+
+                     FirebaseDatabase.getInstance().reference.child("data").child(name.toString()).setValue(i.value).addOnCompleteListener {
+                         task->
+                         if (task.isSuccessful){
+                             FirebaseDatabase.getInstance().reference.child("FavouriteData").removeValue().addOnCompleteListener { task->
+                                if ( task.isSuccessful){
+                                   Toast.makeText(context,"remove",Toast.LENGTH_SHORT).show()
+                                }
+                             }
+
+                         }
+                     }
+                 }
+             }
+
+             override fun onCancelled(error: DatabaseError) {
+
+             }
+         })
+        }
         return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavouriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FavouriteFragment().apply {

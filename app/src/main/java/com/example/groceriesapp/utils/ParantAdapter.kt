@@ -27,13 +27,14 @@ class ParantAdapter(private val mList: ArrayList<ParentModelClass>, val context:
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val ItemsViewModel = mList[position]
-        holder.title.text=mList.get(position).title
-        val childAdapter= CustomAdapter(mList.get(position).childModelClass!!,context)
+        holder.title.text= mList[position].title
+        val childAdapter= CustomAdapter(mList[position].childModelClass!!,context)
         holder.rc.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rc.adapter = childAdapter
 
 
         holder.SeeAll.setOnClickListener {
+            holder.SeeAll.text="See Less"
             Log.e("TAG", "SeeAll:${ItemsViewModel.childModelClass} " )
             val childAdapter= CustomAdapter(mList.get(position).childModelClass!!,context)
            holder.rc.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -41,6 +42,7 @@ class ParantAdapter(private val mList: ArrayList<ParentModelClass>, val context:
             holder.rc.adapter = childAdapter
             Log.e("TAG", "childadapter$childAdapter " )
         }
+
     }
 
     override fun getItemCount(): Int {

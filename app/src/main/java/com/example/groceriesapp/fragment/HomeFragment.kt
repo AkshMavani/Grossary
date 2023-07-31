@@ -11,6 +11,7 @@ import com.example.groceriesapp.R
 import com.example.groceriesapp.databinding.FragmentHomeBinding
 import com.example.groceriesapp.utils.ProductAdapter
 import com.example.groceriesapp.utils.ProductModelClass
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +47,7 @@ class HomeFragment : Fragment() {
        binding.rcProduct.layoutManager = LinearLayoutManager(context)
 
         // ArrayList of class ItemsViewModel
+
        product.add(ProductModelClass(R.drawable.allfruitss,"Fruits"))
        product.add(ProductModelClass(R.drawable.backery1,"Backery"))
        product.add(ProductModelClass(R.drawable.vegetables,"Vegetable"))
@@ -53,14 +55,9 @@ class HomeFragment : Fragment() {
        product.add(ProductModelClass(R.drawable.grossary,"Grossarys"))
        product.add(ProductModelClass(R.drawable.df,"Dry Fruits & Nuts"))
        product.add(ProductModelClass(R.drawable.snacks,"snacks"))
-
-
-
-
-        // This will pass the ArrayList to our Adapter
-        val adapter = ProductAdapter(product)
-        binding.rcProduct.layoutManager = GridLayoutManager(context,3,LinearLayoutManager.VERTICAL,false)
-        binding.rcProduct.adapter = adapter
+     //   val adapter = ProductAdapter(product)
+     //   binding.rcProduct.layoutManager = GridLayoutManager(context,3,LinearLayoutManager.VERTICAL,false)
+      //  binding.rcProduct.adapter = adapter
         return binding.root
     }
 

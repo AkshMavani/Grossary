@@ -33,7 +33,7 @@ class FavouriteAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerV
         Picasso.get().load(mList[position].img).placeholder(R.mipmap.ic_launcher).fit().into(holder.imageView)
      holder.tvName.text=ItemsViewModel.ftitle
         holder.tvml.text=ItemsViewModel.kg
-        holder.tvTotalPrice.text=ItemsViewModel.price
+        holder.tvTotalPrice.text=ItemsViewModel.price+" ₹"
 
     }
 

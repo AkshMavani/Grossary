@@ -37,7 +37,7 @@ class ActivityData : AppCompatActivity() {
 
 
         binding.TvDetail.text=lname
-        binding.tvPrice.text=price
+        binding.tvPrice.text= "$price ₹"
         binding.tvPdetail.text=pdetail
         binding.tvNuration.text=nuration
         binding.ratingBar.rating= rating!!.toFloat()
@@ -48,10 +48,7 @@ class ActivityData : AppCompatActivity() {
             pricedata=score * price!!.toInt()
             Log.e("TAG", "onCreate:$pricedata")
             binding.txtnum.text= score.toString()
-            binding.tvPrice.text=pricedata.toString()
-
-
-
+            binding.tvPrice.text= "$pricedata ₹"
         }
         binding.imgminus.setOnClickListener {
             if (score>0) {
@@ -59,8 +56,7 @@ class ActivityData : AppCompatActivity() {
                 binding.txtnum.text = score.toString()
                 pricedata -= price!!.toInt()
                 Log.e("TAG", "onCreate:$pricedata")
-                binding.tvPrice.text=pricedata.toString()
-
+                binding.tvPrice.text= "$pricedata ₹"
             }
         }
          binding.btnAddBasket.setOnClickListener {
@@ -73,18 +69,15 @@ class ActivityData : AppCompatActivity() {
              val baos = ByteArrayOutputStream()
              bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
              val data = baos.toByteArray()
-
-             var uploadTask = mountainsRef.putBytes(data)
+             val uploadTask = mountainsRef.putBytes(data)
              uploadTask.addOnFailureListener {
                  Log.e("TAG", "onCreate:fail ")
-                 // Handle unsuccessful uploads
              }.addOnCompleteListener { taskSnapshot ->
                  Log.e("TAG", "onCreate:success " )
                     if (taskSnapshot.isSuccessful){
                     mountainsRef.downloadUrl.addOnSuccessListener { task->
-                        Log.e("TAG", "onCreate:$task " )
-
-                        val productDetail=DataModelClass(img =task.toString(),lname=lname.toString(),rating=rating.toString(), description = pdetail.toString(),price=price.toString(), review =nuration.toString(), ftitle =name.toString(), kg = pc.toString()  )
+                        Log.e("TAG", "onCreate:$task")
+                        val productDetail=DataModelClass(img =task.toString(),lname=lname.toString(),rating=rating.toString(), description = pdetail.toString(),price=pricedata.toString(), review =nuration.toString(), ftitle =name.toString(), kg =binding.txtnum.text.toString()+"kg")
                         FirebaseDatabase.getInstance().reference.child("data").child(name.toString()).setValue(productDetail).addOnCompleteListener {
                             task->
                             if (task.isSuccessful){
@@ -122,19 +115,16 @@ class ActivityData : AppCompatActivity() {
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
             val data = baos.toByteArray()
-
             var uploadTask = mountainsRef.putBytes(data)
             uploadTask.addOnFailureListener {
                 Log.e("TAG", "onCreate:fail " )
-                // Handle unsuccessful uploads
             }.addOnCompleteListener { taskSnapshot ->
                 Log.e("TAG", "onCreate:success " )
                 if (taskSnapshot.isSuccessful){
                     mountainsRef.downloadUrl.addOnSuccessListener { task->
                         Log.e("TAG", "onCreate:$task " )
-
                         val productDetail=DataModelClass(img =task.toString(),lname=lname.toString(),rating=rating.toString(), description = pdetail.toString(),price=price.toString(), review =nuration.toString(), ftitle =name.toString(), kg = pc.toString()  )
-                        FirebaseDatabase.getInstance().reference.child("FavouriteData").child(lname.toString()).setValue(productDetail).addOnCompleteListener {
+                        FirebaseDatabase.getInstance().reference.child("FavouriteData").child(name.toString()).setValue(productDetail).addOnCompleteListener {
                                 task->
                             if (task.isSuccessful){
                                 Toast.makeText(this,"Data added ",Toast.LENGTH_SHORT).show()

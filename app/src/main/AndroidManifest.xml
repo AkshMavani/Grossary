@@ -20,9 +20,6 @@
         android:theme="@style/Theme.GroceriesApp"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity2"
-            android:exported="false" />
-        <activity
             android:name=".activity.OnboardingActivity"
             android:exported="false" />
         <activity

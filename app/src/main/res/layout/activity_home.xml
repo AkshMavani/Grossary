@@ -25,13 +25,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView"
         app:menu="@menu/bottom_nav_menu" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/activity_nonetwork"
-        android:visibility="gone"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationHome"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+      android:visibility="gone"
+        app:lottie_rawRes="@raw/nointernet" />
 
 
 

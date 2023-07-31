@@ -32,20 +32,6 @@ class HomeActivity : AppCompatActivity() {
         binding= ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-        val icl=findViewById<View>(R.id.include)
-        val networkConnection=Network(applicationContext)
-       networkConnection.observe(this, Observer {
-                isconnected->
-            if (isconnected){
-                icl.visibility= View.GONE
-            }else{
-                icl.visibility= View.VISIBLE
-
-            }
-        })
-
-     //   val imageslider=findViewById<ImageSlider>(R.id.imageslider)
-
     }
     private fun init(){
         setCurrentFragment(ShopFragment())
@@ -59,19 +45,17 @@ class HomeActivity : AppCompatActivity() {
             }
             true
         }
-//        val icl=findViewById<View>(R.id.include)
-//        val networkConnection=Network(applicationContext)
-//        networkConnection.observe(this, Observer {
-//                isconnected->
-//            if (isconnected){
-//                icl.visibility= View.GONE
-//
-//            }else{
-//                icl.visibility= View.VISIBLE
-//
-//            }
-//        })
-       // cart()
+        val networkConnection=Network(applicationContext)
+        networkConnection.observe(this, Observer {
+                isconnected->
+            if (isconnected){
+               binding.animationHome.visibility=View.GONE
+                binding.fragmentContainerView.visibility=View.VISIBLE
+            }else{
+                binding.animationHome.visibility=View.VISIBLE
+                binding.fragmentContainerView.visibility=View.GONE
+            }
+        })
 
     }
     private fun setCurrentFragment(fragment: Fragment)=

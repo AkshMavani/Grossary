@@ -22,7 +22,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/baseline_person_24"
+            android:src="@drawable/bevagerss"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded">
 
         </com.google.android.material.imageview.ShapeableImageView>

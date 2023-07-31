@@ -1,5 +1,6 @@
 package com.example.groceriesapp.utils
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,13 +31,14 @@ class CartAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerView.A
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val ItemsViewModel = mList[position]
         Picasso.get().load(mList[position].img).placeholder(R.mipmap.ic_launcher).fit().into(holder.imageView)
         holder.tvName.text = ItemsViewModel.ftitle
         holder.tvKg.text = ItemsViewModel.kg
-        holder.tvTotalPrice.text=ItemsViewModel.price
+        holder.tvTotalPrice.text=ItemsViewModel.price+"₹"
 
         holder.close.setOnClickListener {
             mList.removeAt(position)
@@ -54,14 +56,14 @@ class CartAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerView.A
                 total--
                 holder.txtNum.text = total.toString()
                 totalprice= ItemsViewModel.price!!.toInt() * total
-                holder.tvTotalPrice.text=totalprice.toString()
+                holder.tvTotalPrice.text=totalprice.toString()+"₹"
             }
         }
         holder.imgPlus.setOnClickListener {
             total++
             holder.txtNum.text = total.toString()
             totalprice= ItemsViewModel.price!!.toInt() * total
-            holder.tvTotalPrice.text=totalprice.toString()
+            holder.tvTotalPrice.text=totalprice.toString()+"₹"
         }
 
     }
@@ -81,14 +83,5 @@ class CartAdapter(private val mList: ArrayList<DataModelClass>) : RecyclerView.A
         val imgMinus: ImageView = itemView.findViewById(R.id.igCartMinus)
         val imgPlus: ImageView = itemView.findViewById(R.id.igCartPlus)
         val txtNum: TextView = itemView.findViewById(R.id.txtCartText)
-
-
-
-
-
-
-
-
-
     }
 }

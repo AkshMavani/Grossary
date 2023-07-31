@@ -1,5 +1,6 @@
 package com.example.groceriesapp.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
@@ -46,22 +47,37 @@ class CartFragment : Fragment(){
 
         binding.rcCart.layoutManager=LinearLayoutManager(context)
         FirebaseDatabase.getInstance().reference.child("data").addValueEventListener(object : ValueEventListener {
+            @SuppressLint("SetTextI18n", "SuspiciousIndentation")
             override fun onDataChange(snapshot: DataSnapshot) {
                 arr.clear()
+                var sum=0
               for (i in snapshot.children){
                   val message = i.getValue(DataModelClass::class.java)
+                  Log.e("TAG", "child: ${i.child("price").value }", )
+                val count=i.child("price").value.toString().toInt()
+                  Log.e("TAG", "onDataChange: $count")
+                  sum+=count
                   arr.add(message!!)
               }
                 Log.e("TAG", "arr: $arr")
-                val adapter = CartAdapter(arr)
-                binding.rcCart.adapter=adapter
+                Log.e("TAG", "onDataChange: $sum")
+                binding.TvTotal.text="Go To CheckOut $sum₹"
+                if (arr.isEmpty()){
+                    binding.txtMyCart.visibility=View.GONE
+                    binding.btnSum.visibility=View.GONE
+                    binding.animationCart.visibility=View.VISIBLE
+                    binding.rcCart.visibility=View.GONE
+                }else {
+                    binding.animationCart.visibility=View.GONE
+                    val adapter = CartAdapter(arr)
+                    binding.rcCart.adapter = adapter
+                }
             }
-
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
+
         return binding.root
     }
 

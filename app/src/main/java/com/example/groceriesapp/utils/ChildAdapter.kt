@@ -64,7 +64,7 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
 
         // sets the image to the imageview from our itemHolder class
         holder.imageView.setImageResource(ItemsViewModel.images)
-        holder.tv.text=ItemsViewModel.price+"$"
+        holder.tv.text=ItemsViewModel.price+" ₹"
         holder.tv1.text=ItemsViewModel.pc
         holder.tv2.text=ItemsViewModel.ftitle
 
@@ -99,7 +99,6 @@ class CustomAdapter(private val mList: List<ChildModelClass>,val context: Contex
             var uploadTask = mountainsRef.putBytes(data)
             uploadTask.addOnFailureListener {
                 Log.e("TAG", "onCreate:fail " )
-                // Handle unsuccessful uploads
             }.addOnCompleteListener { taskSnapshot ->
                 Log.e("TAG", "onCreate:success")
                 if (taskSnapshot.isSuccessful){

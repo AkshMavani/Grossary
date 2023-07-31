@@ -13,6 +13,7 @@ import android.net.NetworkInfo
 import android.net.NetworkRequest
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 
 class Network(private val context: Context): LiveData<Boolean>() {
@@ -79,8 +80,12 @@ class Network(private val context: Context): LiveData<Boolean>() {
         return networkConnectionCallback
     }
     private fun updateConnection(){
-        val activeNetwork: NetworkInfo = connectivityManager.activeNetworkInfo!!
-        postValue(activeNetwork.isConnected==true)
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        if (activeNetwork != null) {
+            postValue(activeNetwork.isConnected==true)
+        }else{
+            Toast.makeText(context,"Turn on internet",Toast.LENGTH_LONG).show()
+        }
     }
     private val networkReciver=object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {

@@ -103,8 +103,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_marginLeft="8dp"
-                android:fontFamily="@font/black"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/robotoregular"
                 android:text="Categories" />
 
             <TextView
@@ -114,9 +114,8 @@
                 android:layout_gravity="right"
                 android:gravity="right"
                 android:textSize="18sp"
-
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/black"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/robotoregular"
                 android:text="see All" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
